@@ -22,7 +22,11 @@ RUN apk upgrade --no-cache && \
 COPY --from=upstream /usr/bin/rtorrent /usr/bin/rtorrent
 COPY rootfs/ /
 
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh \
+RUN apk add --no-cache --virtual .tic ncurses \
+    && tic -x -o /usr/share/terminfo /tmp/ghostty.terminfo \
+    && rm /tmp/ghostty.terminfo \
+    && apk del --no-cache .tic \
+    && chmod +x /usr/local/bin/docker-entrypoint.sh \
     && chown -R rtorrent:rtorrent /home/download /defaults
 
 USER rtorrent:rtorrent
