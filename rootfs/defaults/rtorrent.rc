@@ -1,0 +1,22 @@
+#############################################################################
+# Default rTorrent configuration for containerized deployment
+# This is a minimal example - mount your own config as needed
+#############################################################################
+
+# Session directory (required)
+session.path.set = /home/download/.session
+
+# Default download directory
+directory.default.set = /home/download/download
+
+# Basic operational settings
+encoding.add = utf8
+system.umask.set = 0027
+
+# Run as a daemon (no ncurses UI)
+system.daemon.set = true
+
+# SCGI socket for RPC access
+network.scgi.open_local = /home/download/rpc.sock
+
+### END of rtorrent.rc ###
