@@ -16,6 +16,7 @@ RUN apk upgrade --no-cache && \
         ncurses-terminfo-base \
         sed \
         tini \
+        tmux \
     && addgroup -g 1001 -S rtorrent \
     && adduser -u 1001 -S rtorrent -G rtorrent -h /home/download
 
@@ -26,6 +27,7 @@ RUN apk add --no-cache --virtual .tic ncurses \
     && tic -x -o /usr/share/terminfo /tmp/ghostty.terminfo \
     && rm /tmp/ghostty.terminfo \
     && apk del --no-cache .tic \
+    && chmod 1777 /tmp \
     && chmod +x /usr/local/bin/docker-entrypoint.sh \
     && chown -R rtorrent:rtorrent /home/download /defaults
 
