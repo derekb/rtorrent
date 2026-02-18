@@ -11,8 +11,8 @@ if [ "${1:-}" = "rtorrent" ] || [ "${1:0:1}" = "-" ]; then
 
     SESSION="rtorrent"
 
-    # Ensure required directories exist
-    mkdir -p "$HOME/.session" "$HOME/download"
+    # Ensure required directories exist (best-effort — HOME may be read-only)
+    mkdir -p "$HOME/.session" "$HOME/download" 2>/dev/null || true
 
     # Start rtorrent inside a named tmux session so it can be attached/detached
     # without interrupting the process (e.g. via: kubectl exec -it <pod> -- tmux attach -t rtorrent)
